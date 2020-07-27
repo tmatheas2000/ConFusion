@@ -17,7 +17,7 @@ export const routes:Routes=[
         path:'dishdetail/:id',component:DishdetailComponent
     },
     {
-        path:'about',component:AboutComponent
+        path:'aboutus',component:AboutComponent
     },
     {
         path:'contactus',component:ContactComponent
