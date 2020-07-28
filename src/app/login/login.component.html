@@ -4,8 +4,6 @@
   <button mat-button mat-dialog-close><span class="fa fa-close"></span></button>
 </mat-toolbar>
 
-<p>{{user | json}}</p>
-
 <form novalidate #loginForm="ngForm" (ngSubmit)="onSubmit()">
   <mat-dialog-content>
     <p>
@@ -14,6 +12,8 @@
         name="username" #username="ngModel" required>
         <mat-error *ngIf="username.errors?.required">Username is required</mat-error>
       </mat-form-field>
+   </p>
+   <p>
       <mat-form-field>
         <input matInput placeholder="Password" type="password" [(ngModel)]="user.password"
         name="password" #password="ngModel" required>

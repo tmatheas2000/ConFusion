@@ -37,35 +37,32 @@
   </div>
   <div fxFlex fxFlexOffset="20px" class="form-size">
     <h3>Send us your Feedback</h3>
-    <p>
-      {{feedbackForm.value | json }} {{feedbackForm.status}}
-    </p>
     <form novalidate [formGroup]="feedbackForm" #fform="ngForm" (ngSubmit)="onSubmit()">
       <p>
         <mat-form-field class="half-width">
           <input matInput formControlName="firstname" placeholder="First Name" type="text" required>
-          <mat-error *ngIf="feedbackForm.get('firstname').hasError('required') && feedbackForm.get('firstname').touched">
-            First Name is required
+          <mat-error *ngIf="formErrors.firstname">
+            {{formErrors.firstname}}
           </mat-error>
         </mat-form-field>
         <mat-form-field class="half-width">
           <input matInput formControlName="lastname" placeholder="Last Name" type="text" required>
-          <mat-error *ngIf="feedbackForm.get('lastname').hasError('required') && feedbackForm.get('lastname').touched">
-            Last Name is required
+          <mat-error *ngIf="formErrors.lastname">
+            {{formErrors.lastname}}
           </mat-error>
         </mat-form-field>
       </p>
       <p>
         <mat-form-field class="half-width">
-          <input matInput formControlName="telnum" placeholder="Tel. Number" type="number" required>
-          <mat-error *ngIf="feedbackForm.get('telnum').hasError('required') && feedbackForm.get('telnum').touched">
-            Tel. Number is required
+          <input matInput formControlName="telnum" placeholder="Tel. Number" type="number" pattern="[0-9]*" required>
+          <mat-error *ngIf="formErrors.telnum">
+            {{formErrors.telnum}}
           </mat-error>
         </mat-form-field>
         <mat-form-field class="half-width">
-          <input matInput formControlName="email" placeholder="Email" type="email" required>
-          <mat-error *ngIf="feedbackForm.get('email').hasError('required') && feedbackForm.get('email').touched">
-            Email is required
+          <input matInput formControlName="email" placeholder="Email" type="email" email required>
+          <mat-error *ngIf="formErrors.email">
+            {{formErrors.email}}
           </mat-error>
         </mat-form-field>
       </p>
