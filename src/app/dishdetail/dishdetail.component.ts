@@ -20,6 +20,7 @@ export class DishdetailComponent implements OnInit {
   next: string;
   commentForm: FormGroup;
   comment: Comment;
+  dishcopy:Dish;
 
   @ViewChild("fform") commentFormDirective;
 
@@ -72,6 +73,7 @@ export class DishdetailComponent implements OnInit {
       )
       .subscribe((dish) => {
         this.dish = dish;
+        this.dishcopy=dish;
         this.setPrevNext(dish.id);
       },errmess=>this.errMess=<any>errmess);
   }
@@ -93,7 +95,7 @@ export class DishdetailComponent implements OnInit {
   createForm() {
     this.commentForm = this.fb.group({
       author: ["", [Validators.required, Validators.minLength(2)]],
-      rating: ["", Validators.required],
+      rating: [5, Validators.required],
       comment: ["", Validators.required],
     });
 
@@ -108,10 +110,18 @@ export class DishdetailComponent implements OnInit {
     let n = d.toISOString();
     this.comment = this.commentForm.value;
     this.comment.date = n;
-    this.dish.comments.push(this.comment);
+    this.dishcopy.comments.push(this.comment);
+    this.dishService.putDish(this.dishcopy).subscribe(dish=>{
+      this.dish=dish;
+      this.dishcopy=dish;
+    },errmess=>{
+      this.dish=null;
+      this.dishcopy=null;
+      this.errMess=<any>errmess;
+    })
     this.commentForm.reset({
       author: "",
-      rating: "",
+      rating: 5,
       comment: "",
     });
     this.commentFormDirective.resetForm();
