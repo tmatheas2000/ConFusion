@@ -1,7 +1,8 @@
 import { Component, OnInit ,ViewChild} from '@angular/core';
 import {FormBuilder,FormGroup,Validators} from '@angular/forms';
 import {Feedback,ContactType} from '../shared/feedback';
-import {flyInOut} from '../animations/app.animation';
+import {flyInOut,expand} from '../animations/app.animation';
+import { FeedbackService } from '../services/feedback.service';
 
 @Component({
   selector: 'app-contact',
@@ -11,20 +12,24 @@ import {flyInOut} from '../animations/app.animation';
     '[@flyInOut]':'true',
     'style':'display: block;'
   },
-  animations:[flyInOut()]
+  animations:[flyInOut(),expand()]
 })
 export class ContactComponent implements OnInit {
 
   feedbackForm:FormGroup;
   feedback:Feedback;
+  feed:Feedback=null;
   contactType=ContactType;
+  errMess:string;
+  view=true;
   @ViewChild('fform') feedbackFormDirective;
 
   formErrors={
     'firstname':'',
     'lastname':'',
     'telnum':'',
-    'email':''
+    'email':'',
+    'message':''
   };
 
   validationMessages={
@@ -45,10 +50,13 @@ export class ContactComponent implements OnInit {
     'email':{
       'required':'Email is required.',
       'email':'Email not in valid format.'
+    },
+    'message':{
+      'required':'Feedback is required.'
     }
   };
 
-  constructor(private fb:FormBuilder) {
+  constructor(private fb:FormBuilder,private feedbackService:FeedbackService) {
     this.createForm();
    }
 
@@ -63,7 +71,7 @@ export class ContactComponent implements OnInit {
       email:['',[Validators.required,Validators.email]],
       agree:false,
       contacttype:'',
-      message:''
+      message:['',Validators.required]
     });
 
     this.feedbackForm.valueChanges.subscribe(data =>this.onValueChanged(data));
@@ -71,8 +79,18 @@ export class ContactComponent implements OnInit {
   }
 
   onSubmit(){
+    this.view =false;
     this.feedback=this.feedbackForm.value;
-    console.log(this.feedback);
+    this.feedbackService.submitFeedback(this.feedback).subscribe(feedback=>{
+      this.feed=feedback;
+      setTimeout(()=>{
+        this.feed=null;
+        this.view=true;
+      },5000)
+    },errmess=>{
+      this.feedback=null;
+      this.errMess=<any>errmess;
+    })
     this.feedbackForm.reset({
       firstname:'',
       lastname:'',
