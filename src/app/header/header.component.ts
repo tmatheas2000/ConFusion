@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import {MatDialog,MatDialogRef} from '@angular/material';
 import { LoginComponent } from '../login/login.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
-  selector: 'app-header',
-  templateUrl: './header.component.html',
-  styleUrls: ['./header.component.scss']
+    selector: 'app-header',
+    templateUrl: './header.component.html',
+    styleUrls: ['./header.component.scss'],
+    standalone: false
 })
 export class HeaderComponent implements OnInit {
 

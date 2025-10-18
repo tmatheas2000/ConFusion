@@ -6,7 +6,7 @@ describe('ProcessHTTPMsgService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {
-    const service: ProcessHTTPMsgService = TestBed.get(ProcessHTTPMsgService);
+    const service: ProcessHTTPMsgService = TestBed.inject(ProcessHTTPMsgService);
     expect(service).toBeTruthy();
   });
 });

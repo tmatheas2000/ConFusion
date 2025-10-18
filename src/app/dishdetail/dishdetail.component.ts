@@ -4,19 +4,20 @@ import { Params, ActivatedRoute } from "@angular/router";
 import { Location } from "@angular/common";
 import { DishService } from "../services/dish.service";
 import { switchMap } from "rxjs/operators";
-import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from "@angular/forms";
 import { Comment } from "../shared/comment";
 import {visibility,flyInOut,expand} from '../animations/app.animation';
 
 @Component({
-  selector: "app-dishdetail",
-  templateUrl: "./dishdetail.component.html",
-  styleUrls: ["./dishdetail.component.scss"],
-  host:{
-    '[@flyInOut]':'true',
-    'style':'display: block;'
-  },
-  animations:[flyInOut(),visibility(),expand()]
+    selector: "app-dishdetail",
+    templateUrl: "./dishdetail.component.html",
+    styleUrls: ["./dishdetail.component.scss"],
+    host: {
+        '[@flyInOut]': 'true',
+        'style': 'display: block;'
+    },
+    animations: [flyInOut(), visibility(), expand()],
+    standalone: false
 })
 export class DishdetailComponent implements OnInit {
   dish: Dish;
@@ -24,7 +25,7 @@ export class DishdetailComponent implements OnInit {
   dishIds: string[];
   prev: string;
   next: string;
-  commentForm: FormGroup;
+  commentForm: UntypedFormGroup;
   comment: Comment;
   dishcopy:Dish;
   visibility='shown';
@@ -64,7 +65,7 @@ export class DishdetailComponent implements OnInit {
     private dishService: DishService,
     private location: Location,
     private route: ActivatedRoute,
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
     @Inject('BaseURL') private BaseURL
   ) {
     this.createForm();

@@ -1,7 +1,8 @@
 import { Directive,ElementRef,Renderer2,HostListener } from '@angular/core';
 
 @Directive({
-  selector: '[appHighlight]'
+    selector: '[appHighlight]',
+    standalone: false
 })
 export class HighlightDirective {
 

@@ -9,15 +9,19 @@
     <p>
       <mat-form-field>
         <input matInput placeholder="Username" type="text" [(ngModel)]="user.username"
-        name="username" #username="ngModel" required>
-        <mat-error *ngIf="username.errors?.required">Username is required</mat-error>
+          name="username" #username="ngModel" required>
+        @if (username.errors?.required) {
+          <mat-error>Username is required</mat-error>
+        }
       </mat-form-field>
-   </p>
-   <p>
+    </p>
+    <p>
       <mat-form-field>
         <input matInput placeholder="Password" type="password" [(ngModel)]="user.password"
-        name="password" #password="ngModel" required>
-        <mat-error *ngIf="password.errors?.required">Password is required</mat-error>
+          name="password" #password="ngModel" required>
+        @if (password.errors?.required) {
+          <mat-error>Password is required</mat-error>
+        }
       </mat-form-field>
       <mat-checkbox [(ngModel)]="user.remember" name="remember" label="Remember Me"></mat-checkbox>
     </p>
