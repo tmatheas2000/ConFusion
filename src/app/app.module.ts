@@ -33,53 +33,43 @@ import {MatSelectModule} from '@angular/material/select';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatSliderModule} from '@angular/material/slider';
-import {HttpClientModule} from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import {baseURL} from './shared/baseurl';
-import { HttpModule } from '@angular/http';
 import {ProcessHTTPMsgService} from './services/process-httpmsg.service';
 import { HighlightDirective } from './directives/highlight.directive';
 import {FeedbackService} from './services/feedback.service';
 
 
-@NgModule({
-  declarations: [
-    AppComponent,
-    MenuComponent,
-    DishdetailComponent,
-    HeaderComponent,
-    FooterComponent,
-    HomeComponent,
-    AboutComponent,
-    ContactComponent,
-    LoginComponent,
-    HighlightDirective
-  ],
-  imports: [
-    BrowserModule,
-    BrowserAnimationsModule,
-    MatToolbarModule,
-    FlexLayoutModule,
-    MatListModule,
-    MatGridListModule,
-    MatCardModule,
-    MatButtonModule,
-    AppRoutingModule,
-    MatDialogModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatCheckboxModule,
-    FormsModule,
-    ReactiveFormsModule,
-    MatSlideToggleModule,
-    MatSelectModule,
-    MatProgressSpinnerModule,
-    MatSliderModule,
-    HttpClientModule,
-    HttpModule
-  ],
-  entryComponents:[LoginComponent],
-  providers: [DishService,PromotionService,LeaderService,FeedbackService,ProcessHTTPMsgService,
-    {provide:'BaseURL',useValue:baseURL}],
-  bootstrap: [AppComponent]
-})
+@NgModule({ declarations: [
+        AppComponent,
+        MenuComponent,
+        DishdetailComponent,
+        HeaderComponent,
+        FooterComponent,
+        HomeComponent,
+        AboutComponent,
+        ContactComponent,
+        LoginComponent,
+        HighlightDirective
+    ],
+    bootstrap: [AppComponent], imports: [BrowserModule,
+        BrowserAnimationsModule,
+        MatToolbarModule,
+        FlexLayoutModule,
+        MatListModule,
+        MatGridListModule,
+        MatCardModule,
+        MatButtonModule,
+        AppRoutingModule,
+        MatDialogModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatCheckboxModule,
+        FormsModule,
+        ReactiveFormsModule,
+        MatSlideToggleModule,
+        MatSelectModule,
+        MatProgressSpinnerModule,
+        MatSliderModule], providers: [DishService, PromotionService, LeaderService, FeedbackService, ProcessHTTPMsgService,
+        { provide: 'BaseURL', useValue: baseURL }, provideHttpClient(withInterceptorsFromDi())] })
 export class AppModule { }

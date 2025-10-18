@@ -4,7 +4,7 @@ import {LEADERS} from '../shared/leaders';
 import {Observable, of} from 'rxjs';
 import {delay} from 'rxjs/operators';
 import {catchError,map} from 'rxjs/operators';
-import {HttpClient} from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import {baseURL} from '../shared/baseurl';
 import {ProcessHTTPMsgService} from '../services/process-httpmsg.service';
 

@@ -8,14 +8,15 @@ import { LeaderService } from '../services/leader.service';
 import { flyInOut,expand } from '../animations/app.animation';
 
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss'],
-  host:{
-    '[@flyInOut]':'true',
-    'style':'display: block;'
-  },
-  animations:[flyInOut(),expand()]
+    selector: 'app-home',
+    templateUrl: './home.component.html',
+    styleUrls: ['./home.component.scss'],
+    host: {
+        '[@flyInOut]': 'true',
+        'style': 'display: block;'
+    },
+    animations: [flyInOut(), expand()],
+    standalone: false
 })
 export class HomeComponent implements OnInit {
 

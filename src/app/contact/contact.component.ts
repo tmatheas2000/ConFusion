@@ -1,22 +1,23 @@
 import { Component, OnInit ,ViewChild} from '@angular/core';
-import {FormBuilder,FormGroup,Validators} from '@angular/forms';
+import {UntypedFormBuilder,UntypedFormGroup,Validators} from '@angular/forms';
 import {Feedback,ContactType} from '../shared/feedback';
 import {flyInOut,expand} from '../animations/app.animation';
 import { FeedbackService } from '../services/feedback.service';
 
 @Component({
-  selector: 'app-contact',
-  templateUrl: './contact.component.html',
-  styleUrls: ['./contact.component.scss'],
-  host:{
-    '[@flyInOut]':'true',
-    'style':'display: block;'
-  },
-  animations:[flyInOut(),expand()]
+    selector: 'app-contact',
+    templateUrl: './contact.component.html',
+    styleUrls: ['./contact.component.scss'],
+    host: {
+        '[@flyInOut]': 'true',
+        'style': 'display: block;'
+    },
+    animations: [flyInOut(), expand()],
+    standalone: false
 })
 export class ContactComponent implements OnInit {
 
-  feedbackForm:FormGroup;
+  feedbackForm:UntypedFormGroup;
   feedback:Feedback;
   feed:Feedback=null;
   contactType=ContactType;
@@ -56,7 +57,7 @@ export class ContactComponent implements OnInit {
     }
   };
 
-  constructor(private fb:FormBuilder,private feedbackService:FeedbackService) {
+  constructor(private fb:UntypedFormBuilder,private feedbackService:FeedbackService) {
     this.createForm();
    }
 
